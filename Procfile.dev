@@ -1,2 +1,3 @@
-web: bin/rails server -p 3000
-css: bin/rails tailwindcss:watch
+web: bin/rails s -b 113.23.254.70 -p 3000
+worker: bundle exec sidekiq -C config/sidekiq.yml
+
