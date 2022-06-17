@@ -82,7 +82,7 @@ gem "slim-rails"
 
 gem 'repost'
 
-
+gem 'simple_form'
 
 
 

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  resources :products
-  resources :payments
+  
   resources :checkout, only: [:create]
   get "home/index"
 

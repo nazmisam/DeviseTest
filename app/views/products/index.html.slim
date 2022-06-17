@@ -2,12 +2,16 @@ p style="color: green" = notice
 
 h1 Products
 
+
 #products
+div.grid.grid-cols-3
   - @products.each do |product|
-    == render product
-    p
-      = link_to "Show this product", product
-    button.btn.btn-primary 
-      = link_to "buy", new_product_payment_path(product.id)
+    div
+      == render product
+      p
+        = link_to "Show this product", product
+      p
+    
+        = link_to "buy", new_product_payment_path(product.id), class: "btn btn-primary"
 
 = link_to "New product", new_product_path

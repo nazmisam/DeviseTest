@@ -18,7 +18,7 @@ class PaymentsTest < ApplicationSystemTestCase
     fill_in "Buyer email", with: @payment.buyer_email
     fill_in "Buyer name", with: @payment.buyer_name
     fill_in "Buyer phone", with: @payment.buyer_phone
-    fill_in "Products", with: @payment.products_id
+    fill_in "Products", with: @payment.product_id
     click_on "Create Payment"
 
     assert_text "Payment was successfully created"
@@ -26,14 +26,14 @@ class PaymentsTest < ApplicationSystemTestCase
   end
 
   test "should update Payment" do
-    visit payment_url(@payment)
+    visit product_payments_url(@payment)
     click_on "Edit this payment", match: :first
 
     fill_in "Buyer address", with: @payment.buyer_address
     fill_in "Buyer email", with: @payment.buyer_email
     fill_in "Buyer name", with: @payment.buyer_name
     fill_in "Buyer phone", with: @payment.buyer_phone
-    fill_in "Products", with: @payment.products_id
+    fill_in "Products", with: @payment.product_id
     click_on "Update Payment"
 
     assert_text "Payment was successfully updated"
@@ -41,7 +41,7 @@ class PaymentsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Payment" do
-    visit payment_url(@payment)
+    visit product_payments_url(@payment)
     click_on "Destroy this payment", match: :first
 
     assert_text "Payment was successfully destroyed"
