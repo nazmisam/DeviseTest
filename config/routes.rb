@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :products
+  resources :payments
+  resources :checkout, only: [:create]
   get "home/index"
 
   # route where any visitor require the helloWorldJob to be triggered
@@ -15,4 +18,7 @@ Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
 
+  resources :products do
+    resources :payments
+  end
 end
