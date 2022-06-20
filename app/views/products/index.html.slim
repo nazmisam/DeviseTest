@@ -1,17 +1,25 @@
 p style="color: green" = notice
-
-h1 Products
-
+div.prose.bg-content
+  br
+  h1 Products
+  
+container.flex.justify-end
+  = link_to "New product", new_product_path, class:"btn btn-dark"
+  br
 
 #products
 div.grid.grid-cols-3.gap-4
   - @products.each do |product|
-    div
-      == render product
-      p
-        = link_to "Show this product", product
-      p
-    
-        = link_to "buy", new_product_payment_path(product.id), class: "btn btn-primary"
-
-= link_to "New product", new_product_path
+    div.card.card-compact.w-96.bg-base-100.shadow-xl
+      figure 
+        img alt="Shoes" src="https://www.nicepng.com/png/detail/789-7898081_best-android-smartphones-with-large-screen-display-smartphones.png"
+      container.card-body.bg-gradient-to-r.from-indigo-500.via-purple-500.to-pink-500
+        h2.card-title 
+          =< product.name
+        p
+          strong Price: RM
+          =< product.price
+        div.card-actions.justify-end
+          = link_to "Show this product", product, class: "btn btn-primary"
+      
+          = link_to "buy", new_product_payment_path(product.id), class: "btn btn-primary"
