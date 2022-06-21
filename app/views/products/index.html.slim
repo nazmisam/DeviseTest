@@ -13,8 +13,8 @@ br
 div.grid.grid-cols-3.gap-4
   - @products.each do |product|
     div.card.card-compact.w-96.bg-base-100.shadow-xl
-      figure 
-        img alt="Shoes" src="https://www.nicepng.com/png/detail/789-7898081_best-android-smartphones-with-large-screen-display-smartphones.png"
+      figure
+        =< image_tag product.image, style:"height: 200px; width: 200px; display: block"
       container.card-body.bg-gradient-to-r.from-indigo-500.via-purple-500.to-pink-500
         h2.card-title 
           =< product.name
