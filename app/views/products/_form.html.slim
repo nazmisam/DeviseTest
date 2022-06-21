@@ -15,11 +15,12 @@
     = form.number_field :price
 
   div
-    - if product.image.attached?
-      = image_tag product.image, style: "width: 200px; display: block"
+    = turbo_frame_tag dom_id(product) do
+      - if product.image.attached?
+        = image_tag product.image, style: "width: 200px; display: block"
 
-    = form.label :image
-    = form.file_field :image
+      = form.label :image
+      = form.file_field :image
 
   div
     = form.submit
