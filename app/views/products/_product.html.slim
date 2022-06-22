@@ -1,12 +1,22 @@
 div id="#{dom_id product}"
-  
-  p
-    strong Product:
-    =< image_tag product.image, style:"height: 200px; width: 200px; display: block"
-  
-  p
-    strong Name:
-    =< product.name
-  p
-    strong Price:
-    =< product.price
+  div.card.card-compact.w-96.bg-base-100.shadow-xl.bg-primary     
+    figure.carousel.rounded-box
+      =< image_tag product.image, style:"height: 200px; width: 200px; display: block"
+    container.card-body.bg-gradient-to-r.from-indigo-500.via-purple-500.to-pink-500
+      h2.card-title
+        =< product.name
+      p.font-mono
+        strong Price: RM
+        =< product.price
+
+      - if params[:action] == 'index'
+        div.card-actions.justify-end
+          = link_to "Show this product", product, class: "btn btn-primary"
+
+          = link_to "buy", new_product_payment_path(product.id), class: "btn btn-primary"
+      - else
+              
+
+      
+      
+      

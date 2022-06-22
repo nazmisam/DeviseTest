@@ -70,6 +70,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: '113.23.254.70', port: 3000 }
 
+  config.action_controller.default_url_options
+
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings ={

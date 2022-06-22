@@ -1,9 +1,13 @@
+div.min-h-full.flex.items-center.justify-center.py-12.px-4.sm:px-6.lg:px-8
+  div.max-w-md.w-full.space-y-8
+    = turbo_stream_from "products"
+    = turbo_frame_tag "products" do
+      == render @product
 
-== render @product
+    
+    => link_to "Edit this product", edit_product_path(@product)
+    '|
+    =< link_to "Back to products", products_path
 
-div
-  => link_to "Edit this product", edit_product_path(@product)
-  '|
-  =< link_to "Back to products", products_path
 
-  = button_to "Destroy this product", @product, method: :delete
+    = button_to "Destroy this product", @product, method: :delete

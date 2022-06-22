@@ -1,4 +1,5 @@
 div.prose.bg-content
+  
   br
   h1 Products
   
@@ -8,20 +9,10 @@ br
  
 
 #products
+= turbo_stream_from "products"
+= turbo_frame_tag "products" do
 div.sm:grid-rows-none
-  div.lg:grid.grid-cols-3.gap-4
+  div.lg:grid.grid-cols-3.gap-4 
     - @products.each do |product|
-      div.card.card-compact.w-96.bg-base-100.shadow-xl
-        figure
-          =< image_tag product.image, style:"height: 200px; width: 200px; display: block"
-        container.card-body.bg-gradient-to-r.from-indigo-500.via-purple-500.to-pink-500
-          h2.card-title 
-            =< product.name
-          p
-            strong Price: RM
-            =< product.price
-          div.card-actions.justify-end
-            = link_to "Show this product", product, class: "btn btn-primary"
-        
-            = link_to "buy", new_product_payment_path(product.id), class: "btn btn-primary"
+        == render product
 br
