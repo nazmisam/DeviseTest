@@ -5,12 +5,10 @@
       ul
         - @payment.errors.each do |error|
           li = error.full_message
-  / .my-5
-  /   = form.input_field :account_pay, value: ["#{@product.splits.account}"], selected:true, disabled:true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
-
+ 
   .my-5
     = form.label :product_id, "Product Name", style: "display: block"
-    = form.input_field :product_id, collection: ["#{@product.name}"], selected:true, disabled:true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+    = form.input_field :product_id, value: @product.id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
 
   .my-5
     = form.label :total_pay, "Product Price", style: "display: block"   

@@ -19,7 +19,7 @@
     div.lg:grid.grid-cols-3.gap-4
       - @products.each do |product|
         button
-          = link_to product_path(product)
+          = link_to user_product_path(product)
             == render product
     div
       = turbo_frame_tag "products" do    

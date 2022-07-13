@@ -28,10 +28,12 @@ class Users::PaymentsController < ApplicationController
   # POST /payments or /payments.json
   def create
     @payment = Payment.new(payment_params)
-    # @split = Split.where(product_id: params[:product_id])
-    # @split.each do |split|
-    #   Rails.logger.debug "marah marah #{split.split_total}"
-    # end
+    @split = Split.where(product_id: params[:product_id])
+    @split.each do |split|
+      @payment.total_pay = split.split_total
+      @payment.save
+    end
+    @payment = Payment.new(payment_params)
     if @payment.save
       Rails.logger.debug("testing #{@payment.generate_checksum}")
       params_api = {

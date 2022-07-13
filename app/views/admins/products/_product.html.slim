@@ -10,13 +10,6 @@ div id="#{dom_id product}"
       p.font-mono
         strong Price: RM 
         =< product.price
-      / - ratio = 0
-      / - @product.splits.each do |split|
-      /   - ratio = product.price * "#{@product.splits.split_percent}" / 100
-      /   => product.price = ratio
-      .card-action.bg-gradient-to-r.from-indigo-500.via-purple-500.to-pink-500.flex.justify-end
-        .btn.btn-primary
-          = link_to "buy", new_product_payment_path(product.id)
       
       
    

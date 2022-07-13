@@ -5,7 +5,7 @@
   h1.font-bold.text-5xl Products 
     
   div.flex.justify-end
-    = link_to "New products", new_product_path, data: { turbo_frame: 'modal' }, class:"btn btn-dark"
+    = link_to "New products", new_admin_product_path, data: { turbo_frame: 'modal' }, class:"btn btn-dark"
 
 
   br
@@ -19,7 +19,7 @@
     div.lg:grid.grid-cols-3.gap-4
       - @products.each do |product|
         button
-          = link_to product_path(product)
+          = link_to admin_product_path(product)
             == render product
     div
       = turbo_frame_tag "products" do    

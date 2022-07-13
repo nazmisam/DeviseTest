@@ -12,8 +12,14 @@
 
   <body>
 
+    <% if admin_signed_in? %>
+      <%= render "admins/home/header"%>
+    <% elsif user_signed_in? %>
+      <%= render "users/home/header"%>
+    <% else %>
+      <%= render "home/header"%>
+    <% end %>
   
-  <%= render "home/header"%>
 
 
   <div>
