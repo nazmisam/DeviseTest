@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   resources :checkout, only: [:create]
   get "home/index"
 
@@ -19,5 +20,6 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :payments
+    resources :splits
   end
 end

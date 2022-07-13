@@ -1,13 +1,45 @@
-div.min-h-full.flex.items-center.justify-center.py-12.px-4.sm:px-6.lg:px-8
-  div.max-w-md.w-full.space-y-8
-    = turbo_stream_from "products"
-    = turbo_frame_tag "products" do
-      == render @product
+.w-full.max-w-3xl.mx-auto
+  div
+    h1.font-bold.text-4xl #{@product.name}
+    br
 
+  div
+    div
+      br
+      .grid.grid-cols-2
+        
+        div.flex.justify-start
+          =< link_to "Back to product", products_path, class:"btn btn-dark"
+
+        div.flex.justify-end
+          = link_to "Pay now!", new_product_payment_path(@product, @payment), class: "ml-2 rounded-lg py-3 px-5 bg-blue-100 inline-block font-medium"
+      br
+    div.flex.justify-center
     
-    => link_to "Edit this product", edit_product_path(@product)
-    '|
-    =< link_to "Back to products", products_path
+      = image_tag @product.image, style:"height: 200px; width: 200px; display: block"
+    br
+    br
+    div.relative.mx-auto
+      .absolute.mx-auto
+        p 
+          strong.text-4xl.font-semibold Overview : 
+        
+        p 
+          text.xl.font-bold Price: RM "#{@product.price}"
+        
+      br
+      br
 
-
-    = button_to "Destroy this product", @product, method: :delete
+    div
+      br
+      br
+      table
+        tr
+          td
+            = button_to "Destroy this product", @product, method: :delete, class: "btn btn-primary"
+          td 
+            = link_to "Add split settlement", product_splits_path(@product), class: "btn btn-primary"
+          td 
+            = link_to "Edit this product", edit_product_path, class: "btn btn-primary"
+      br
+  

@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
    
     @products = Product.all
     @product = Product.new
+    
   end
 
   # GET /products/1 or /products/1.json
@@ -20,7 +21,6 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    
   end
 
   # POST /products or /products.json
@@ -29,10 +29,10 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
+        format.turbo_stream { render turbo_stream: turbo_stream.append(@product, partial: 'products/product', locals: { product: @product })}
+        format.html { redirect_to product_url(@product), notice: 'Product was successfully created.' }
         format.json { render :show, status: :created, location: @product }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: 'posts/form', locals: { post: @post }) }
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end

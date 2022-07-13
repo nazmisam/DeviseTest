@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_21_015418) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_13_024434) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,16 +44,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_015418) do
     t.string "buyer_email"
     t.string "buyer_address"
     t.string "buyer_phone"
-    t.bigint "product_id", null: false
+    t.integer "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "total_pay"
+    t.string "account_pay"
   end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "splits", force: :cascade do |t|
+    t.string "account"
+    t.decimal "split_percent"
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_splits_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,4 +86,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_21_015418) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "splits", "products"
 end

@@ -1,18 +1,25 @@
-div.prose.bg-content
-  
-  br
-  h1 Products
-  
-div.flex.justify-end
-  = link_to "New product", new_product_path, class:"btn btn-dark"
-br
- 
+.w-full.max-w-7xl.mx-auto
+  = turbo_stream_from "products"
 
-#products
-= turbo_stream_from "products"
-= turbo_frame_tag "products" do
-div.sm:grid-rows-none
-  div.lg:grid.grid-cols-3.gap-4 
-    - @products.each do |product|
-        == render product
-br
+ 
+  h1.font-bold.text-5xl Products 
+    
+  div.flex.justify-end
+    = link_to "New products", new_product_path, data: { turbo_frame: 'modal' }, class:"btn btn-dark"
+
+
+  br
+  br
+  
+
+  #products
+
+
+  div.sm:grid-rows-none
+    div.lg:grid.grid-cols-3.gap-4
+      - @products.each do |product|
+        button
+          = link_to product_path(product)
+            == render product
+    div
+      = turbo_frame_tag "products" do    

@@ -63,7 +63,7 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem "letter_opener"
+  gem 'letter_opener_web'
   gem "rubocop", require: false
 end
 
@@ -76,7 +76,9 @@ end
 
 gem 'devise', '~> 4.8', '>= 4.8.1'
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'cssbundling-rails'
+
+gem 'trix-rails'
 
 gem "slim-rails"
 
