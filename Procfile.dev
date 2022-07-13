@@ -1,3 +1,2 @@
 web: bin/rails s -b 113.23.254.70 -p 3000
-worker: bundle exec sidekiq -C config/sidekiq.yml
 css: yarn build:css --watch

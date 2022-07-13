@@ -1,0 +1,35 @@
+= simple_form_for  [@product, @payment], data:{turbo:false}  do |form|
+  / - if @payment.errors.any?
+  /   div style="color: red"
+  /     h2 = "#{pluralize(@payment.errors.count, "error")} prohibited this payment from being saved:"
+  /     ul
+  /       - @payment.errors.each do |error|
+  /         li = error.full_message
+  .my-5
+    = form.input_field :account_pay, value: ["#{@product.splits.account}"], selected:true, disabled:true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+
+  .my-5
+    = form.label :product_id, "Product Name", style: "display: block"
+    = form.input_field :product_id, collection: ["#{@product.name}"], selected:true, disabled:true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+
+  .my-5
+    = form.label :product_id, "Product Price", style: "display: block"   
+    = form.input_field :total_pay, collection: ["#{@product.price}"], selected:true, disabled:true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+  .my-5
+    = form.label :buyer_name, style: "display: block"
+    = form.text_field :buyer_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+  .my-5
+    = form.label :buyer_email, style: "display: block"
+    = form.text_field :buyer_email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+
+  .my-5
+    = form.label :buyer_address, style: "display: block"
+    = form.text_field :buyer_address, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+
+  .my-5
+    = form.label :buyer_phone, style: "display: block"
+    = form.text_field :buyer_phone
+
+  
+  .form-actions.flex.justify-end
+    = form.submit

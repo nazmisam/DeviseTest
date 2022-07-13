@@ -1,0 +1,4 @@
+div id="#{dom_id split}"
+  td =< split.account
+  td  RM #{'%.2f' % (split.product.price*split.split_percent) }(#{split.split_percent})
+  td =< split.product.name

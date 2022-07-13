@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @payment
+
+div
+  => link_to "Edit this payment", edit_product_payment_path(@payment)
+  '|
+  =< link_to "Back to payments", product_payments_path
+
+  = button_to "Destroy this payment", @payments, method: :delete

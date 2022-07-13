@@ -1,0 +1,11 @@
+= simple_form_for [@product, @split], data:{turbo:false} do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :account
+    = f.input :split_percent
+    = f.association :product
+
+  .form-actions
+    = f.button :submit
