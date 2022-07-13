@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
   # POST /payments or /payments.json
   def create
     @payment = Payment.new(payment_params)
-    @split = Split.where(split_id)
+   
 
     # @split.each do |split|
     #   payment

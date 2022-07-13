@@ -1,2 +1,2 @@
-web: bin/rails s -b 113.23.254.70 -p 3000
+web: bin/rails s -p 3000
 css: yarn build:css --watch

@@ -43,7 +43,7 @@ class Admins::ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to product_url(@product), notice: "Product was successfully updated." }
+        format.html { redirect_to admin_product_url(@product), notice: "Product was successfully updated." }
         format.json { render :show, status: :ok, location: @product }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@post, partial: 'posts/form', locals: { post: @post }) }
@@ -58,7 +58,7 @@ class Admins::ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url, alert: "Product was successfully destroyed." }
+      format.html { redirect_to admin_products_url, alert: "Product was successfully destroyed." }
       format.json { head :no_content }
     end
   end

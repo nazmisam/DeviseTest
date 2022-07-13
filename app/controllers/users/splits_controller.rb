@@ -23,6 +23,7 @@ class Users::SplitsController < ApplicationController
   # POST /splits or /splits.json
   def create
     @split = Split.new(split_params)
+   
  
     respond_to do |format|
       if @split.save

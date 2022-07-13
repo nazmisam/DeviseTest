@@ -2,7 +2,7 @@
   h1.text-4xl.font-bold Settlement Rates
   br
   br
-  = link_to "New split", new_product_split_path, class: "btn btn-primary"
+  = link_to "New split", new_admin_product_split_path, class: "btn btn-primary"
   div.flex.justify-center.relative.overflow-x-auto.shadow-md.sm:rounded-lg
     #splits
       table.table.table-compact.w-full
@@ -18,6 +18,6 @@
                 == render split
 
                 td
-                  = link_to "Show this split", product_split_path(@product, split.id), class: "btn btn-primary"
+                  = link_to "Show this split", admin_product_split_path(@product, split.id), class: "btn btn-primary"
 
                 
