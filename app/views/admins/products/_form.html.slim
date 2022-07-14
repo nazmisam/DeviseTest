@@ -5,7 +5,14 @@
       ul
         - @product.errors.each do |error|
           li = error.full_message
+  div
+   
 
+    = form.text_field :admin_id, value: Admin.ids, :required => true, class: "input input-bordered input-primary w-full max-w-xs"       
+  div
+    = form.label :account_name, style: "display: block"
+
+    = form.text_field :account_name, :required => true, class: "input input-bordered input-primary w-full max-w-xs"
   div
     = form.label :name, style: "display: block"
 

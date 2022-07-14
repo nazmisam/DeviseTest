@@ -23,7 +23,6 @@ class Admins::SplitsController < ApplicationController
   # POST /splits or /splits.json
   def create
     @split = Split.new(split_params)
-    sum = @product.price
 
     sum = (@product.price * @split.split_percent)
     Rails.logger.debug "kepala bana #{sum}"

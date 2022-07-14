@@ -30,10 +30,14 @@ class Users::PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     @split = Split.where(product_id: params[:product_id])
     @split.each do |split|
+      @payment = Payment.new(payment_params)
       @payment.total_pay = split.split_total
+      @payment.account_name = split.account
       @payment.save
+      Rails.logger.debug "successfull save #{@payment.account_name}"
     end
     @payment = Payment.new(payment_params)
+    
     if @payment.save
       Rails.logger.debug("testing #{@payment.generate_checksum}")
       params_api = {
@@ -94,7 +98,7 @@ class Users::PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id)
+      params.require(:payment).permit(:account_name, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id)
     end
   
 end
