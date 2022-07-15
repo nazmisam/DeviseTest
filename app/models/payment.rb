@@ -1,5 +1,5 @@
 class Payment < ApplicationRecord
-  belongs_to :product 
+  belongs_to :products
 
   def generate_checksum
     data = "#{buyer_email}|#{buyer_name}|#{buyer_phone}|#{""}|#{id}|#{product.name}|http://localhost:3000/users/products/#{product.id}/payments/paymentredirect|#{product.price}|#{"02b66d73-c60f-47e6-a07c-0aa3609ddddd"}"

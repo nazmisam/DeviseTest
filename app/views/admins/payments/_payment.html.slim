@@ -1,16 +1,19 @@
 div id="#{dom_id payment}"
-  p
-    strong Buyer name:
+  td
+    
     =< payment.buyer_name
-  p
-    strong Buyer email:
+  td
+
     =< payment.buyer_email
-  p
-    strong Buyer address:
+  td
+    strong 
     =< payment.buyer_address
-  p
-    strong Buyer phone:
+  td
+    
     =< payment.buyer_phone
-  p
-    strong Products:
+  td
+    
     =< payment.product_id
+  td
+    
+    =< 'RM' '%.2f' % payment.total_pay

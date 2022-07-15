@@ -1,11 +1,30 @@
-p style="color: green" = notice
+.w-full.max-w-4xl.mx-auto
+  h1.text-4xl.font-bold.flex.justify-center Payments
+  br
+  br
 
-h1 Payments
+  div.flex.justify-center.relative.overflow-x
+    #payments
+      table.table 
+        thead 
+          th 
+            strong Buyer name
+          th 
+            strong email
+          th 
+            strong shipping address
+          th 
+            strong Contact Number
+          th 
+            strong Products
+          th 
+            strong Transaction Amounts:
 
-#payments
-  - @payments.each do |payment|
-    == render payment
-    p
-      = link_to "Show this payment", payment
+        
+            - @payments.each do |payment|
+              tbody 
+                tr
+                  == render payment
+                br
+              
 
-= link_to "New payment", new_payment_path

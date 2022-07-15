@@ -1,5 +1,4 @@
 class Admins::PaymentsController < ApplicationController
-  before_action :get_product
   before_action :set_payment, only: %i[ show edit update destroy ]
 
      
@@ -7,7 +6,7 @@ class Admins::PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    @payments = @product.payments
+    @payments = Payment.all
   
   end
 
