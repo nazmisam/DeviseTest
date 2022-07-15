@@ -9,7 +9,7 @@ div id="#{dom_id product}"
         =< product.name
       p.font-mono
         strong Price: RM 
-        =< product.price
+        =< '%.2f' % product.price
       
       
    

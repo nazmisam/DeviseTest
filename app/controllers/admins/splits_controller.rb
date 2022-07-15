@@ -74,6 +74,6 @@ class Admins::SplitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def split_params
-      params.require(:split).permit(:account, :split_percent, :product_id, :split_total)
+      params.require(:split).permit(:account, :split_percent, :product_id, :split_total, :role)
     end
 end

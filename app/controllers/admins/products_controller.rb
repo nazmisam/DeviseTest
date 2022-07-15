@@ -4,8 +4,8 @@ class Admins::ProductsController < ApplicationController
   # GET /products or /products.json
   def index
    
-    @products = Product.all
-    @product = Product.new
+    @products = current_admin.products
+    
     
   end
 
@@ -71,6 +71,6 @@ class Admins::ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :price, :image, :account_name, :admin_id)
+      params.require(:product).permit(:name, :price, :image, :admin_id)
     end
 end

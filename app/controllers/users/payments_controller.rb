@@ -1,4 +1,5 @@
 class Users::PaymentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, :only=>[:paymentredirect]
   before_action :get_product
   before_action :set_payment, only: %i[ show edit update destroy ]
 
@@ -18,7 +19,9 @@ class Users::PaymentsController < ApplicationController
   # GET /payments/new
   def new  
     @payment = @product.payments.new
-    
+    @split = Split.find_by(product_id: params[:product_id], role: 'Main Seller')
+    @product = Product.find_by(params[:name])
+    Rails.logger.debug "Cariberjaya #{@split}"
   end
 
   # GET /payments/1/edit
@@ -28,7 +31,7 @@ class Users::PaymentsController < ApplicationController
   # POST /payments or /payments.json
   def create
     @payment = Payment.new(payment_params)
-    @split = Split.where(product_id: params[:product_id])
+    @split = Split.where(product_id: params[:product_id], role: 'Vendor')
     @split.each do |split|
       @payment = Payment.new(payment_params)
       @payment.total_pay = split.split_total
@@ -50,7 +53,7 @@ class Users::PaymentsController < ApplicationController
         product_description: @product.name,
         transaction_amount: @payment.total_pay,
         callback_url: "",
-        redirect_url: "",
+        redirect_url: "http://localhost:3000/users/products/#{@product.id}/payments/paymentredirect",
         token: "ZiSzpYWJ4VY5xhb1W7M9",
         redirect_post: "true"
       }
@@ -61,6 +64,29 @@ class Users::PaymentsController < ApplicationController
     end
   end
 
+  def paymentredirect
+   
+    user = User.find_by(email: params[:buyer_email])
+    
+    payment_status = params[:payment_status]
+    
+    @payment = Payment.find_by(buyer_email: params[:buyer_email], buyer_name: params[:buyer_name])
+    if payment_status == "true"
+      sign_in(user) if user.present?
+      redirect_to user_products_path(id: @payment.id, product_id: @product.id), notice: "Payment Success!"
+
+        
+        # else
+        #     Rails.logger.debug("this is public")
+        #     ReceiptEventMailer.with(participant: @participant).post_created.deliver_now
+        #     redirect_to event_onboard_payments_path(id: @participant.id,event_id: @participant.event_id), notice: "Payment Success!"
+        # end
+    # else
+        # Rails.logger.debug "status failed #{participant_status}"
+        # redirect_to event_onboard_payment_register_path(@participant.event_id, :event_id => @participant.event_id), alert: "Payment Unsuccessful!"
+        # flash[:alert] = 'Payment Failed!'
+    end
+  end
   # PATCH/PUT /payments/1 or /payments/1.json
   def update
     respond_to do |format|
@@ -98,7 +124,7 @@ class Users::PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:account_name, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id)
+      params.require(:payment).permit(:account_name, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name)
     end
   
 end

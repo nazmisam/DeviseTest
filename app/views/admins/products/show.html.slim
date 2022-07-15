@@ -24,7 +24,7 @@
           strong.text-4xl.font-semibold Overview : 
         
         p 
-          text.xl.font-bold Price: RM "#{@product.price}"
+          text.xl.font-bold Price: RM #{'%.2f' % @product.price}
         
       br
       br

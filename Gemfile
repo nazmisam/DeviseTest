@@ -86,4 +86,6 @@ gem 'repost'
 
 gem 'simple_form'
 
+gem 'simple_form-tailwind'
+
 gem "hotwire-rails", "~> 0.1.3"

@@ -18,7 +18,11 @@ namespace :users, as: :user do
 
   root :to => "home#index"
   resources :products do
-    resources :payments
+    resources :payments do
+      collection do
+        post :paymentredirect
+      end
+    end
     resources :splits
   end
 end
