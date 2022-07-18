@@ -4,7 +4,7 @@ class Admins::HomeController < ApplicationController
 
 
   def index
-    @product = Product.where(product_id)
+   
     @payment = Payment.where(params[:id])
    
   end

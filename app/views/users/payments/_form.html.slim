@@ -8,6 +8,9 @@
   .my-5
     = form.input_field :account_name, value: @split.account, as: :hidden, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
   .my-5
+    = form.label :order_number, "Order number", auto_complete: true, style: "display: block"
+    = form.input_field :order_number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+  .my-5
     = form.input_field :product_id, as: :hidden, value: @product.id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
   .my-5
     = form.label :product_name, "Product Name", style: "display: block"

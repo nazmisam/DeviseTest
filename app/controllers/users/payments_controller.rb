@@ -22,6 +22,7 @@ class Users::PaymentsController < ApplicationController
     @split = Split.find_by(product_id: params[:product_id], role: 'Main Seller')
     @product = Product.find_by(params[:name])
     Rails.logger.debug "Cariberjaya #{@split}"
+    @payment.generate_order_number
   end
 
   # GET /payments/1/edit
@@ -31,15 +32,9 @@ class Users::PaymentsController < ApplicationController
   # POST /payments or /payments.json
   def create
     @payment = Payment.new(payment_params)
-    @split = Split.where(product_id: params[:product_id], role: 'Vendor')
-    @split.each do |split|
-      @payment = Payment.new(payment_params)
-      @payment.total_pay = split.split_total
-      @payment.account_name = split.account
-      @payment.save
-      Rails.logger.debug "successfull save #{@payment.account_name}"
-    end
-    @payment = Payment.new(payment_params)
+    @split = Split.where(product_id: params[:product_id])
+    @payment.generate_order_number
+    
     
     if @payment.save
       Rails.logger.debug("testing #{@payment.generate_checksum}")
@@ -49,7 +44,7 @@ class Users::PaymentsController < ApplicationController
         buyer_email: @payment.buyer_email,
         buyer_name: @payment.buyer_name,
         buyer_phone: @payment.buyer_phone,
-        order_number: @payment.id,
+        order_number: @payment.order_number,
         product_description: @product.name,
         transaction_amount: @payment.total_pay,
         callback_url: "",
@@ -61,6 +56,14 @@ class Users::PaymentsController < ApplicationController
         params: params_api)
     else
       Rails.logger.debug "Failed to save"
+    end
+
+    @split.each do |split|
+      @payment = Payment.new(payment_params)
+      @payment.total_pay = split.split_total
+      @payment.account_name = split.account
+      @payment.save
+      Rails.logger.debug "successfull save #{@payment.account_name}"
     end
   end
 
@@ -124,7 +127,7 @@ class Users::PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:account_name, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name)
+      params.require(:payment).permit(:product_number, :account_name, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name)
     end
   
 end

@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_14_045256) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_121026) do
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.string "bank_name"
+    t.integer "split_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["split_id"], name: "index_accounts_on_split_id"
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_14_045256) do
     t.decimal "total_pay"
     t.string "account_name"
     t.string "product_name"
+    t.integer "order_number"
   end
 
   create_table "products", force: :cascade do |t|
@@ -82,7 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_14_045256) do
     t.datetime "updated_at", null: false
     t.decimal "split_total"
     t.string "role"
-    t.index ["product_id"], name: "index_splits_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_14_045256) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accounts", "splits"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "splits", "products"

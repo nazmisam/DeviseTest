@@ -18,7 +18,10 @@ namespace :admins, as: :admin do
   resources :payments
   root :to => "home#index"
   resources :products do
-    resources :payments
-    resources :splits
+    resources :payments do
+      resources :splits do
+        resources :accounts
+      end
+    end
   end
 end

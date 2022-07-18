@@ -23,6 +23,6 @@ namespace :users, as: :user do
         post :paymentredirect
       end
     end
-    resources :splits
+    resources :splits 
   end
 end

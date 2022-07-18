@@ -1,6 +1,6 @@
 class Split < ApplicationRecord
-  belongs_to :product
-
+  has_many :accounts, dependent: :destroy
+  belongs_to :payment
 
   validate :percentage_rate
 

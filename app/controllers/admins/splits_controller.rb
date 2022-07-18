@@ -1,6 +1,6 @@
 class Admins::SplitsController < ApplicationController
   before_action :get_product
-  before_action :set_split, only: %i[ show edit update destroy ]
+  before_action :set_split, only: %i[show edit update destroy]
 
   # GET /splits or /splits.json
   def index
@@ -25,7 +25,7 @@ class Admins::SplitsController < ApplicationController
     @split = Split.new(split_params)
 
     sum = (@product.price * @split.split_percent)
-    Rails.logger.debug "kepala bana #{sum}"
+    Rails.logger.debug "bahagi#{sum}"
     @split.split_total = sum
     respond_to do |format|
       if @split.save
