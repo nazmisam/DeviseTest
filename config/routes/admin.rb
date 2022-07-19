@@ -16,12 +16,12 @@ end
 
 namespace :admins, as: :admin do
   resources :payments
+  resources :accounts
+  resources :splits
   root :to => "home#index"
   resources :products do
     resources :payments do
-      resources :splits do
-        resources :accounts
-      end
+    
     end
   end
 end

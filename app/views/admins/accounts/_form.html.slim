@@ -1,4 +1,4 @@
-= simple_form_for(@account) do |f|
+= simple_form_for [:admin,@account] do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
@@ -6,7 +6,7 @@
     = f.input :name
     = f.input :number
     = f.input :bank_name
-    = f.association :split
+    = f.input :split_id, as: :select, collection: [@splits.id]
 
   .form-actions
     = f.button :submit

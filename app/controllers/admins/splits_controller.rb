@@ -1,10 +1,9 @@
 class Admins::SplitsController < ApplicationController
-  before_action :get_product
-  before_action :set_split, only: %i[show edit update destroy]
+  before_action :set_split, only: %i[ show edit update destroy ]
 
   # GET /splits or /splits.json
   def index
-    @splits = @product.splits
+    @splits = Split.all
   end
 
   # GET /splits/1 or /splits/1.json
@@ -13,7 +12,7 @@ class Admins::SplitsController < ApplicationController
 
   # GET /splits/new
   def new
-    @split = @product.splits.new
+    @split = Split.new
   end
 
   # GET /splits/1/edit
@@ -23,13 +22,10 @@ class Admins::SplitsController < ApplicationController
   # POST /splits or /splits.json
   def create
     @split = Split.new(split_params)
-
-    sum = (@product.price * @split.split_percent)
-    Rails.logger.debug "bahagi#{sum}"
-    @split.split_total = sum
+ 
     respond_to do |format|
       if @split.save
-        format.html { redirect_to admin_product_split_url(@product, @split), notice: "Split was successfully created." }
+        format.html { redirect_to product_split_url(@product, @split), notice: "Split was successfully created." }
         format.json { render :show, status: :created, location: @split }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +38,7 @@ class Admins::SplitsController < ApplicationController
   def update
     respond_to do |format|
       if @split.update(split_params)
-        format.html { redirect_to admin_split_url(@split), notice: "Split was successfully updated." }
+        format.html { redirect_to split_url(@split), notice: "Split was successfully updated." }
         format.json { render :show, status: :ok, location: @split }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,24 +52,19 @@ class Admins::SplitsController < ApplicationController
     @split.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_product_splits_url, notice: "Split was successfully destroyed." }
+      format.html { redirect_to product_splits_url, notice: "Split was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-
-    def get_product
-      @product = Product.find(params[:product_id])
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_split
-      @split = @product.splits.find(params[:id])
+      @split = Split.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def split_params
-      params.require(:split).permit(:account, :split_percent, :product_id, :split_total, :role)
+      params.require(:split).permit(:account, :split_percent, :split_total)
     end
 end

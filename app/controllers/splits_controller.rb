@@ -1,10 +1,9 @@
 class SplitsController < ApplicationController
-  before_action :get_product
   before_action :set_split, only: %i[ show edit update destroy ]
 
   # GET /splits or /splits.json
   def index
-    @splits = @product.splits
+    @splits = Split.all
   end
 
   # GET /splits/1 or /splits/1.json
@@ -13,7 +12,7 @@ class SplitsController < ApplicationController
 
   # GET /splits/new
   def new
-    @split = @product.splits.new
+    @split = Split.new
   end
 
   # GET /splits/1/edit
@@ -59,14 +58,9 @@ class SplitsController < ApplicationController
   end
 
   private
-
-    def get_product
-      @product = Product.find(params[:product_id])
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_split
-      @split = @product.splits.find(params[:id])
+      @split = Split.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

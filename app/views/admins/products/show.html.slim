@@ -37,7 +37,7 @@
           td
             = button_to "Destroy this product", @product, method: :delete, class: "btn btn-primary"
           td 
-            = link_to "Add split settlement", admin_product_splits_path(@product), class: "btn btn-primary"
+            = link_to "Add split settlement", admin_product_payments_path(@product), class: "btn btn-primary"
           td 
             = link_to "Edit this product", edit_admin_product_path, class: "btn btn-primary"
       br
