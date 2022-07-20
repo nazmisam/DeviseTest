@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
     belongs_to :admin
+    has_many :splits, dependent: :destroy
+    has_many :splitsettlements, dependent: :destroy
     has_many :payments, dependent: :destroy
     has_one_attached :image
 

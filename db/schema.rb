@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_19_021756) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_19_100101) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,13 +59,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_021756) do
     t.string "buyer_email"
     t.string "buyer_address"
     t.string "buyer_phone"
-    t.integer "product_id", null: false
+    t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "total_pay"
     t.string "account_name"
     t.string "product_name"
     t.integer "order_number"
+    t.string "status", default: "Pending"
   end
 
   create_table "products", force: :cascade do |t|
@@ -71,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_021756) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "account_name"
-    t.integer "admin_id"
+    t.bigint "admin_id"
     t.index ["admin_id"], name: "index_products_on_admin_id"
   end
 
@@ -82,6 +86,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_19_021756) do
     t.datetime "updated_at", null: false
     t.decimal "split_total"
     t.string "role"
+    t.bigint "product_id"
+    t.integer "admin_id"
+    t.index ["product_id"], name: "index_splits_on_product_id"
+  end
+
+  create_table "splitsettlements", force: :cascade do |t|
+    t.string "account_name"
+    t.integer "product_id"
+    t.decimal "split_amount"
+    t.string "product_name"
+    t.integer "order_number"
+    t.string "payment_status"
+    t.integer "transaction_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "payment_id"
+    t.decimal "split_percent"
+    t.integer "admin_id"
+    t.index ["payment_id"], name: "index_splitsettlements_on_payment_id"
   end
 
   create_table "users", force: :cascade do |t|

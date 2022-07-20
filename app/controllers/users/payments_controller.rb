@@ -58,13 +58,6 @@ class Users::PaymentsController < ApplicationController
       Rails.logger.debug "Failed to save"
     end
 
-    @split.each do |split|
-      @payment = Payment.new(payment_params)
-      @payment.total_pay = split.split_total
-      @payment.account_name = split.account
-      @payment.save
-      Rails.logger.debug "successfull save #{@payment.account_name}"
-    end
   end
 
   def paymentredirect
@@ -76,18 +69,9 @@ class Users::PaymentsController < ApplicationController
     @payment = Payment.find_by(buyer_email: params[:buyer_email], buyer_name: params[:buyer_name])
     if payment_status == "true"
       sign_in(user) if user.present?
+      @payment.update(status: 'Paid')
       redirect_to user_products_path(id: @payment.id, product_id: @product.id), notice: "Payment Success!"
 
-        
-        # else
-        #     Rails.logger.debug("this is public")
-        #     ReceiptEventMailer.with(participant: @participant).post_created.deliver_now
-        #     redirect_to event_onboard_payments_path(id: @participant.id,event_id: @participant.event_id), notice: "Payment Success!"
-        # end
-    # else
-        # Rails.logger.debug "status failed #{participant_status}"
-        # redirect_to event_onboard_payment_register_path(@participant.event_id, :event_id => @participant.event_id), alert: "Payment Unsuccessful!"
-        # flash[:alert] = 'Payment Failed!'
     end
   end
   # PATCH/PUT /payments/1 or /payments/1.json
@@ -127,7 +111,7 @@ class Users::PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:product_number, :account_name, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name)
+      params.require(:payment).permit(:order_number, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name)
     end
   
 end

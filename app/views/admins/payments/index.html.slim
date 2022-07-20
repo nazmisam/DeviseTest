@@ -1,16 +1,14 @@
-.w-full.max-w-4xl.mx-auto
-  h1.text-4xl.font-bold.flex.justify-center Payments
+.w-full.max-w.mx-auto
+  h1.text-4xl.font-bold.flex.justify-center Transactions
   br
   br
   
   div.flex.justify-center.relative.overflow-x
     #payments
       table.table 
-        thead 
+        thead  
           th
-            strong Account 
-          th
-            strong Buyer name
+            strong Customer name
           th 
             strong email
           th 
@@ -20,13 +18,16 @@
           th 
             strong Products
           th 
-            strong Transaction Amounts:
+            strong Transaction Amounts
+          th 
+            strong Action
 
         
             - @payments.each do |payment|
               tbody 
                 tr
                   == render payment
-                br
+                  td
+                    = link_to "Show transactions", admin_payment_splitsettlements_path(payment)
               
 

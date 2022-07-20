@@ -1,0 +1,18 @@
+div id="#{dom_id splitsettlement}"
+  td
+    =< splitsettlement.account_name
+  td 
+    | RM
+    =< '%.2f' % splitsettlement.product.price
+  td 
+    | RM #{'%.2f' % (splitsettlement.product.price - splitsettlement.split_amount)}
+    
+  td
+    =< splitsettlement.product_name
+  td
+    =< splitsettlement.order_number
+  td
+    =< splitsettlement.payment_status
+  td
+    | RM
+    =< '%.2f' % splitsettlement.split_amount

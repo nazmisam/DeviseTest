@@ -3,7 +3,7 @@ p style="color: green" = notice
 == render @split
 
 div
-  => link_to "Edit this split", edit_admin_product_split_path(@split)
+  => link_to "Edit this split", edit_admin_product_split_path(@split.product_id, @split.id)
   '|
   =< link_to "Back to splits", admin_product_splits_path
 

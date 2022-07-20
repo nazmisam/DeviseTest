@@ -15,13 +15,13 @@ devise_scope :admin do
 end
 
 namespace :admins, as: :admin do
-  resources :payments
+  resources :payments do
+    resources :splitsettlements
+  end
   resources :accounts
-  resources :splits
   root :to => "home#index"
   resources :products do
-    resources :payments do
-    
-    end
+    resources :splits
+    resources :payments
   end
 end
