@@ -10,13 +10,15 @@
     = form.label :order_number, "Order number", auto_complete: true, style: "display: block"
     = form.input_field :order_number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
   .my-5
-    = form.input_field :product_id, as: :hidden, value: @product.id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+    .my-5
+    = form.input_field :admin_id, value: @product.admin_id, as: :hidden, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+    = form.input_field :product_id, value: params[:product_id], as: :hidden, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
   .my-5
     = form.label :product_name, "Product Name", style: "display: block"
-    = form.input_field :product_name, value: @product.name, selected: true,class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+    = form.input_field :product_name, value: @product.name ,class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
   .my-5
     = form.label :total_pay, "Product Price", style: "display: block"   
-    = form.input_field :total_pay, value: '%.2f' % @product.price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
+    = form.input_field  :total_pay, value: '%.2f' % @product.price, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"
   .my-5
     = form.label :buyer_name, style: "display: block"
     = form.text_field :buyer_name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/2"

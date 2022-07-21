@@ -7,13 +7,13 @@ class Admins::PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    @payments = Payment.all
-    @products = Product.where(params[:product_name])
-    
+    @payments = Payment.where(admin_id: current_admin.id)
   end
 
   # GET /payments/1 or /payments/1.json
   def show
+    @payments = Payment.all
+    @products = Product.where(params[:product_name])
   end
 
   # GET /payments/new
@@ -102,7 +102,7 @@ class Admins::PaymentsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
-      @payment = @product.payments.find(params[:id])
+      @payment = Payment.find(params[:id])
      
     end
 

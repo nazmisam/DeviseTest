@@ -4,28 +4,74 @@
     br
     br
     
-      =< link_to "Back to splitsettlements", admin_payment_splitsettlements_path
-    .flex.justify-center 
-      table.table.flex.justify-center 
-        thead 
-          th
-            strong Account Name
-          th 
-            strong Transaction Amounts
-          th 
-            strong Amount Deduct
-          th
-            strong Product Name
-          th 
-            strong Order Number
-          th 
-            strong Payment Status
-          th 
-            strong Amount Receive
-            
-        tbody 
-          tr
-            == render @splitsettlement
-
-          
+      =< link_to "Back to splitsettlements", admin_splitsettlements_path
+    .page-body
+      .container-xl
+        .card.card-lg
+          .card-body
+            table
+              tr
+                td
+                  p.h3 #{@splitsettlement.account_name}
+                  #address
+                    | Street Address
+                    br/
+                    | State, City
+                    br/
+                    | Region, Postal Code
+                    br/
+                    | ltd@example.com
                 
+            .col-12.my-5
+              h1 Receipt #{@splitsettlement.order_number}
+            table.table.table-transparent.table-responsive
+              thead
+                tr
+                  th.text-center style=("width: 1%") 
+                  th Product
+                  th.text-center style=("width: 1%")  Status
+                  th.text-end style=("width: 1%")  Unit
+                  th.text-end style=("width: 1%")  Amount
+
+            
+              tr
+                td.text-center 1
+                td
+                  p.strong.mb-1  
+                    =< @splitsettlement.product_name
+                  .text-muted 
+                td.text-center
+                  =< @splitsettlement.payment_status
+                td.text-end 
+                  =< 'RM''%.2f' % @splitsettlement.product.price
+                td.text-end 
+                  =< 'RM' '%.2f' % @splitsettlement.split_amount
+              
+              tr
+                td.strong.text-end colspan="4"  Amount deduct
+                td.text-end 
+                  | RM #{'%.2f' % (@splitsettlement.product.price - @splitsettlement.split_amount)}
+            
+              tr
+                td.font-weight-bold.text-uppercase.text-end colspan="4"  Total Due
+                td.font-weight-bold.text-end 
+                  =< 'RM' '%.2f' % @splitsettlement.split_amount
+            p.text-muted.text-center.mt-5
+              | Thank you very much for doing business with us. We look forward to working with
+              | you again!
+    footer.footer.footer-transparent.d-print-none
+      .container-xl
+        .row.text-center.align-items-center.flex-row-reverse
+          .col-lg-auto.ms-lg-auto
+           
+          .col-12.col-lg-auto.mt-3.mt-lg-0
+            ul.list-inline.list-inline-dots.mb-0
+              li.list-inline-item
+                | Copyright &copy; 2022
+                / = succeed "." do
+                  a.link-secondary href="."  Tabler
+                | All rights reserved.
+              li.list-inline-item
+                a.link-secondary href="./changelog.html" rel="noopener" 
+                  | v1.0.0-beta10
+

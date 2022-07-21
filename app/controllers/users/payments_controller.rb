@@ -19,8 +19,10 @@ class Users::PaymentsController < ApplicationController
   # GET /payments/new
   def new  
     @payment = @product.payments.new
+
+    Rails.logger.debug "Product id #{@product.id}"
     @split = Split.find_by(product_id: params[:product_id], role: 'Main Seller')
-    @product = Product.find_by(params[:name])
+    @products = Product.find(params[:product_id])
     Rails.logger.debug "Cariberjaya #{@split}"
     @payment.generate_order_number
   end
@@ -71,7 +73,9 @@ class Users::PaymentsController < ApplicationController
       sign_in(user) if user.present?
       @payment.update(status: 'Paid')
       redirect_to user_products_path(id: @payment.id, product_id: @product.id), notice: "Payment Success!"
-
+    else
+      redirect_to user_products_path(id: @payment.id, product_id: @product.id), alert: "Payment unsuccessful!"
+    
     end
   end
   # PATCH/PUT /payments/1 or /payments/1.json
@@ -111,7 +115,7 @@ class Users::PaymentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:order_number, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name)
+      params.require(:payment).permit(:order_number, :total_pay, :buyer_name, :buyer_email, :buyer_address, :buyer_phone, :product_id, :product_name, :admin_id)
     end
   
 end

@@ -4,14 +4,13 @@ class Admins::SplitsettlementsController < ApplicationController
 
   # GET /splitsettlements or /splitsettlements.json
   def index
-    @splitsettlements = Splitsettlement.where(payment_id: params[:payment_id], admin_id: current_admin.id)
-    
-    
+    @splitsettlements = Splitsettlement.where(admin_id: current_admin.id)
   end
 
   # GET /splitsettlements/1 or /splitsettlements/1.json
   def show
     @splitsettlements = Splitsettlement.where(account_name: params[:account_name])
+ 
   end
 
   # GET /splitsettlements/new

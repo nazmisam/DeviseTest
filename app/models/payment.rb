@@ -22,6 +22,7 @@ class Payment < ApplicationRecord
     product.splits.each do |s|
       rate = s.split_percent
       sum = total_pay * rate / 100
+      
       split_settlement = Splitsettlement.new(payment_id: id, split_amount: sum, product_name: product_name, product_id: product_id, order_number: order_number, payment_status: status, split_percent: rate, account_name: s.account, admin_id: s.admin_id)
       split_settlement.save
     end
