@@ -7,13 +7,16 @@ class Admins::PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    @payments = Payment.where(admin_id: current_admin.id)
+    if current_admin.as_admin?
+      @payments = Payment.all
+    else
+      @payments = Payment.where(admin_id: current_admin.id)
+    end
   end
 
   # GET /payments/1 or /payments/1.json
   def show
-    @payments = Payment.all
-    @products = Product.where(params[:product_name])
+   
   end
 
   # GET /payments/new

@@ -6,7 +6,7 @@ devise_for :users, controllers: {
 
 devise_scope :user do
   authenticated :user do
-    root 'users/dashboards#index', as: :authenticated_user_root
+    root 'users/home#index', as: :authenticated_user_root
   end
 
   unauthenticated :user do

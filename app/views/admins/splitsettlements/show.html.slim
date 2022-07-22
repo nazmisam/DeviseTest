@@ -12,7 +12,7 @@
             table
               tr
                 td
-                  p.h3 #{@splitsettlement.account_name}
+                  p.h3 #{@splitsettlement.admin.name}
                   #address
                     | Street Address
                     br/
@@ -24,18 +24,21 @@
                 
             .col-12.my-5
               h1 Receipt #{@splitsettlement.order_number}
+              | Settlements Created at: #{@splitsettlement.created_at.localtime}
             table.table.table-transparent.table-responsive
               thead
                 tr
-                  th.text-center style=("width: 1%") 
+                  th.text-center style=("width: 1%") Payment ID
                   th Product
                   th.text-center style=("width: 1%")  Status
-                  th.text-end style=("width: 1%")  Unit
+                  th.text-end style=("width: 1%")  Price
                   th.text-end style=("width: 1%")  Amount
 
             
               tr
-                td.text-center 1
+                td.text-center 
+                  = link_to  @splitsettlement.payment_id, admin_payment_path(@splitsettlement.payment_id)
+                 
                 td
                   p.strong.mb-1  
                     =< @splitsettlement.product_name
@@ -45,15 +48,21 @@
                 td.text-end 
                   =< 'RM''%.2f' % @splitsettlement.product.price
                 td.text-end 
-                  =< 'RM' '%.2f' % @splitsettlement.split_amount
-              
+                   =< 'RM''%.2f' % @splitsettlement.product.price
               tr
-                td.strong.text-end colspan="4"  Amount deduct
+                td.strong.text-end colspan="4"  Shared Percent
+                td.text-end
+                  | #{@splitsettlement.split_percent} %
+
+              tr 
+                td.strong.text-end colspan="4" Amount Shared To Other Merchants 
                 td.text-end 
-                  | RM #{'%.2f' % (@splitsettlement.product.price - @splitsettlement.split_amount)}
+                  |- RM #{'%.2f' % (@splitsettlement.product.price - @splitsettlement.split_amount)}
+
+
             
               tr
-                td.font-weight-bold.text-uppercase.text-end colspan="4"  Total Due
+                td.font-weight-bold.text-uppercase.text-end colspan="4"  Amount Received
                 td.font-weight-bold.text-end 
                   =< 'RM' '%.2f' % @splitsettlement.split_amount
             p.text-muted.text-center.mt-5

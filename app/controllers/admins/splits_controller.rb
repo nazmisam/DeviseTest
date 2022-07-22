@@ -4,7 +4,10 @@ class Admins::SplitsController < ApplicationController
 
   # GET /splits or /splits.json
   def index
+    
     @splits = @product.splits
+    @test = Product.where(id: params[:product_id])
+    Rails.logger.debug "apa id#{@test}"
   end
 
   # GET /splits/1 or /splits/1.json
@@ -41,7 +44,7 @@ class Admins::SplitsController < ApplicationController
   def update
     respond_to do |format|
       if @split.update(split_params)
-        format.html { redirect_to admin_split_url(@split), notice: "Split was successfully updated." }
+        format.html { redirect_to admin_product_split_url(@split), notice: "Split was successfully updated." }
         format.json { render :show, status: :ok, location: @split }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -73,6 +76,6 @@ class Admins::SplitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def split_params
-      params.require(:split).permit(:admin_id, :account, :split_percent, :product_id, :split_total, :role)
+      params.require(:split).permit(:admin_id, :split_percent, :product_id, :split_total, :role)
     end
 end

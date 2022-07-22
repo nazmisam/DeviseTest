@@ -1,22 +1,26 @@
 .w-full.max-w-4xl.mx-auto
-  .card.w-96.bg-primary.text-primary-content
+  =< link_to "Back to splits", admin_product_splits_path, class: "btn"
+  .card.w-96.bg-white
     .card-body
       h2.card-title Your percentage details!
       p 
         strong account: 
-        |#{@split.account}
+        |#{@split.admin.name}
       p 
         strong Rate percentage:
         |#{ '%.0f' % @split.split_percent}%
       p 
         strong Product name:
         |#{@product.name}
-      .card-actions.flex.justify-end
+      .card-actions.flex.justify-start
         table
           td
-            => link_to "Edit this split", edit_admin_product_split_path(@split.product_id, @split.id)
+            => link_to "Edit this split", edit_admin_product_split_path(@split.product_id, @split.id), class: "btn btn-warning"
           td
-            = button_to "Destroy this split", @splits, method: :delete
+            = button_to "Destroy this split", @splits, method: :delete, class: "btn btn-error"
+          
+
+          
 
 
 

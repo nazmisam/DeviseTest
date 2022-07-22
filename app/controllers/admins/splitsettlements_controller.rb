@@ -4,7 +4,11 @@ class Admins::SplitsettlementsController < ApplicationController
 
   # GET /splitsettlements or /splitsettlements.json
   def index
-    @splitsettlements = Splitsettlement.where(admin_id: current_admin.id)
+    if current_admin.as_admin?
+      @splitsettlements = Splitsettlement.all
+    else
+      @splitsettlements = Splitsettlement.where(admin_id: current_admin.id)
+    end
   end
 
   # GET /splitsettlements/1 or /splitsettlements/1.json

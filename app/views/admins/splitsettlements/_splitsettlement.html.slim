@@ -1,6 +1,9 @@
 div id="#{dom_id splitsettlement}"
+
+  td 
+    =< splitsettlement.created_at
   td
-    =< splitsettlement.account_name
+    =< splitsettlement.admin.name
   td 
     | RM
     =< '%.2f' % splitsettlement.product.price

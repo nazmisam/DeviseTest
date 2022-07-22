@@ -1,5 +1,6 @@
 class Payment < ApplicationRecord
   belongs_to :product
+  belongs_to :admin
   has_many :splitsettlements, dependent: :destroy
   before_validation :generate_order_number, on: :create
   after_update_commit :split_settlement
@@ -18,14 +19,20 @@ class Payment < ApplicationRecord
   end
 
   def split_settlement
+    main_sum = product.price
+    main_rate = 100
+    Rails.logger.debug 'price #{product.price}'
     return unless status == 'Paid'
     product.splits.each do |s|
       rate = s.split_percent
+      main_rate = main_rate - rate
       sum = total_pay * rate / 100
-      
+      main_sum = main_sum - sum
       split_settlement = Splitsettlement.new(payment_id: id, split_amount: sum, product_name: product_name, product_id: product_id, order_number: order_number, payment_status: status, split_percent: rate, account_name: s.account, admin_id: s.admin_id)
       split_settlement.save
     end
+    split_settlement = Splitsettlement.new(payment_id: id, split_amount: main_sum, product_name: product_name, product_id: product_id, order_number: order_number, payment_status: status, split_percent: main_rate, admin_id: product.admin_id)
+    split_settlement.save
   end
 
 end

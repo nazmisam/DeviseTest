@@ -1,9 +1,6 @@
 class Admins::AdminsController < ApplicationController
   # before_action :set_admin, only: %i[ show edit update destroy ]
-
-
-    #before_action :authenticate_admin!
-
+  #before_action :authenticate_admin!
   # # GET /users or /users.json
   # def index
   #   @posts = Post.joins(:admin)
@@ -12,7 +9,9 @@ class Admins::AdminsController < ApplicationController
   #     format.json { render json: UserDatatable.new(params) }
   #   end
   # end
-
+  def after_sign_out_path_for(resource)
+    stored_location_for(resource) || new_admin_session_path
+  end
   # GET /users/1 or /users/1.json
   # def show
   #   @user = User.find(params[:id])

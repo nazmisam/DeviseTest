@@ -1,3 +1,4 @@
+
 .w-full.max-w-4xl.mx-auto
   h1.text-4xl.font-bold Settlement Accounts
   br
@@ -11,13 +12,19 @@
           th Split Percentage(%) 
           th Product
           th Action
-    
-          - @splits.each do |split|
-            tbody
+        tbody
+          tr
+            - sum = 100
+            - @splits.each do |split|
               tr
                 == render split
-
+                - sum = sum - split.split_percent
                 td
                   = link_to "Show this split", admin_product_split_path(@product, split.id), class: "btn btn-primary"
-
-                
+          tr   
+            td #{@product.admin.name}
+            td #{'%.0f' % sum}%
+            td #{@product.name}
+              
+        
+            

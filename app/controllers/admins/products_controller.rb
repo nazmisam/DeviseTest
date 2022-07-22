@@ -3,10 +3,11 @@ class Admins::ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-   
-    @products = current_admin.products
-    
-    
+    if current_admin.as_admin?
+      @products = Product.all
+    else
+      @products = current_admin.products
+    end
   end
 
   # GET /products/1 or /products/1.json

@@ -3,7 +3,7 @@ class Admins::AccountsController < ApplicationController
 
   # GET /accounts or /accounts.json
   def index
-    @accounts = Account.all
+    @admins = Admin.as_merchant
   end
 
   # GET /accounts/1 or /accounts/1.json

@@ -1,0 +1,11 @@
+.navbar.mb-2.shadow-lg.bg-neutral.text-neutral-content
+  .px-2.mx-2.navbar-start
+    span.text-lg.font-bold
+      | Gadget
+  .hidden.px-2.mx-2.navbar-center.lg:flex
+    .flex.items-stretch
+  .navbar-end
+    button.btn.btn-ghost
+      = link_to "sign in", new_user_session_path
+    button.btn.btn-ghost
+      = link_to "sign up", new_user_registration_path

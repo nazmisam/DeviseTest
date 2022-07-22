@@ -11,10 +11,9 @@
   .form-inputs
 
     = f.label :admin_id, "Admin ID", class: 'text-sm font-medium text-gray-600 block' 
-    = f.input_field :admin_id, as: :select, collection: Admin.all.ids, class: 'shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out', error_class: 'border-red-500', required: true
+    = f.input_field :admin_id, as: :select, collection: Admin.as_merchant.where.not(id: @product.admin_id), selected: true,class: 'shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out', error_class: 'border-red-500', required: true
     = f.label :role, "Roles", class: 'text-sm font-medium text-gray-600 block' 
     = f.input_field :role, as: :select, collection: ["Main Seller", "Vendor"], class: 'shadow appearance-none border border-gray-300 rounded w-full py-2 px-3 bg-white focus:outline-none focus:ring-0 focus:border-blue-500 text-gray-400 leading-6 transition-colors duration-200 ease-in-out', error_class: 'border-red-500', required: true
-    = f.input :account, required: true
     = f.input :split_percent,  required: true
 
 

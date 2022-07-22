@@ -6,7 +6,7 @@ devise_for :admins, controllers: {
 
 devise_scope :admin do
   authenticated :admin do
-    root 'admins/dashboards#index', as: :authenticated_admin_root
+    root 'admins/home#index', as: :authenticated_admin_root
   end
 
   unauthenticated :admin do
@@ -15,11 +15,13 @@ devise_scope :admin do
 end
 
 namespace :admins, as: :admin do
-  resources :payments 
-  resources :splitsettlements
-
-  resources :accounts
-  root :to => "home#index"
+  resources :accounts  
+  resources :home
+  resources :payments
+  resources :splitsettlements 
+    
+  
+  
   resources :products do
     resources :splits
     resources :payments

@@ -5,7 +5,7 @@
         table
           tr
             td
-              p.h3 Company
+              p.h3 #{@payment.admin.name}
               #address
                 | Street Address
                 br/
@@ -28,6 +28,7 @@
                 | ctr@example.com
         .col-12.my-5
           h1 Invoice #{@payment.order_number}
+          | Payment Created at: #{@payment.created_at}
         table.table.table-transparent.table-responsive
           thead
             tr
@@ -57,7 +58,7 @@
               =< 'RM' '%.2f' % @payment.total_pay
         
           tr
-            td.font-weight-bold.text-uppercase.text-end colspan="4"  Total Due
+            td.font-weight-bold.text-uppercase.text-end colspan="4"  Total Paid
             td.font-weight-bold.text-end 
               =< 'RM' '%.2f' % @payment.total_pay
         p.text-muted.text-center.mt-5

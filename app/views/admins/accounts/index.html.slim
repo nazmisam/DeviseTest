@@ -3,9 +3,32 @@ p style="color: green" = notice
 h1 Accounts
 
 #accounts
-  - @accounts.each do |account|
-    == render account
-    p
-      = link_to "Show this account", account
-
-= link_to "New account", new_admin_product_payment_split_account_path
+table.table 
+  thead  
+    th
+      strong ID
+    th 
+      strong Merchants
+    th 
+      strong Email
+    th 
+      strong Role
+    th
+      strong Action
+  tbody 
+    - @admins.each do |a|
+      tr
+        td 
+          =< a.id
+        td
+          =< a.username
+        td 
+          =< a.email
+        td 
+          =< a.roles
+        td 
+          = link_to admin_account_split(a.id)
+        
+              
+      
+    

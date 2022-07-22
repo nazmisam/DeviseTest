@@ -5,7 +5,7 @@
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name),data: {turbo: false}) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="rounded-md shadow-sm -space-y-px">
         <div>

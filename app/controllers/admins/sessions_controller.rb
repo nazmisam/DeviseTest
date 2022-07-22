@@ -10,7 +10,7 @@ class Admins::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   # def create
-  #   super
+  #   stored_location_for(resource) || admin_root_path
   # end
 
   # DELETE /resource/sign_out

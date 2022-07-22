@@ -1,7 +1,7 @@
 module.exports = {
   content: [
     './app/views/**/*.html.erb',
-    './app/views/**/*.slim',
+    './app/views/**/*.html.slim',
     './app/helpers/**/*.rb',
     './app/assets/stylesheets/**/*.css',
     './app/javascript/**/*.js'
@@ -12,12 +12,12 @@ module.exports = {
   // daisyUI config (optional)
   daisyui: {
     styled: true,
-    themes: true,
+    themes: false,
     base: true,
     utils: true,
     logs: true,
     rtl: false,
     prefix: "",
-    darkTheme: "cupcake",
+    darkTheme: false,
   },
 }

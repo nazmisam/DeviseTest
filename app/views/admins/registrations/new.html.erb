@@ -5,9 +5,12 @@
       <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up your account now</h2>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <%= f.label :name, class: "sr-only" %><br />
+          <%= f.input :name, autofocus: true, autocomplete: "username", class:"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: 'Username' %>
         <div>
           <%= f.label :email, class: "sr-only" %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm", placeholder: 'Email' %>
