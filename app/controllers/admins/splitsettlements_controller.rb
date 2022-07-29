@@ -13,8 +13,12 @@ class Admins::SplitsettlementsController < ApplicationController
 
   # GET /splitsettlements/1 or /splitsettlements/1.json
   def show
-    @splitsettlements = Splitsettlement.where(account_name: params[:account_name])
- 
+    @splitsettlements = Splitsettlement.where(admin_id: current_admin.id)
+    @product = Product.find_by(params[:admin_id])
+    @splits = Splitsettlement.where.not(admin_id: current_admin.id).where( payment_id: @splitsettlement.payment_id, product_id: @splitsettlement.product_id)
+    Rails.logger.debug "product no #{params[:product_id]}"
+    # @splits = Payment.where(product_id: @payment.product_id)
+    
   end
 
   # GET /splitsettlements/new
@@ -65,7 +69,7 @@ class Admins::SplitsettlementsController < ApplicationController
   end
 
   private
-
+   
 
     # Use callbacks to share common setup or constraints between actions.
     def set_splitsettlement
