@@ -54,7 +54,7 @@
                 tr
                   - @splits.each do |s|
                     tr
-                      td.strong.text-end colspan="4" Shared To #{s.admin.name}  (#{'%.0f' % s.split_percent}%)
+                      td.strong.text-end colspan="4"  #{ link_to "Shared To #{s.admin.name}  (#{'%.0f' % s.split_percent}%)", admin_splitsettlement_merchant_share_path(s) }
                       td.text-end - RM #{'%.2f' % (s.product.price * s.split_percent / 100)}
 
                 tr

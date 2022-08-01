@@ -68,11 +68,17 @@ class Admins::SplitsettlementsController < ApplicationController
     end
   end
 
+  def merchant_share
+    @splitsettlement = Splitsettlement.find_by(id: params[:splitsettlement_id])
+    @splits = Splitsettlement.where( admin_id: @splitsettlement.admin_id, product_id: @splitsettlement.product_id)
+  end
+
   private
    
 
     # Use callbacks to share common setup or constraints between actions.
     def set_splitsettlement
+      
       @splitsettlement = Splitsettlement.find(params[:id])
     end
 

@@ -1,0 +1,37 @@
+h1.font-bold.text-4xl #{@splitsettlement.admin.name}
+.w-full.max-w-5xl.mx-auto
+
+  .bg-white.shadow-md.rounded.px-8.pt-6.pb-8.mb-1
+    
+    br
+    #splitsettlements.flex.justify-center
+      table.table 
+        thead
+          th 
+            strong Transaction Date
+          th
+            strong Account Name
+          th 
+            strong Total Transaction
+          th 
+            strong Shared amount
+          th
+            strong Product Name
+          th 
+            strong Order Number
+          th 
+            strong Payment Status
+          th 
+            strong Amount Receive
+          th 
+            strong Action
+          
+
+        - @splits.each do |splitsettlement|
+          tbody 
+            tr
+              == render splitsettlement
+        
+      
+              td 
+                = link_to "Show", admin_splitsettlement_path(splitsettlement)

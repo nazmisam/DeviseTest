@@ -18,7 +18,9 @@ namespace :admins, as: :admin do
   resources :accounts  
   resources :home
   resources :payments
-  resources :splitsettlements 
+  resources :splitsettlements do
+    get :merchant_share
+  end
     
   
   
